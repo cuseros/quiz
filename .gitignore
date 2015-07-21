@@ -28,6 +28,8 @@ $RECYCLE.BIN/
 .AppleDouble
 .LSOverride
 node_modules
+quiz.sqlite
+.env
 
 # Thumbnails
 ._*
