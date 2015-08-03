@@ -15,11 +15,30 @@ exports.load = function(req, res, next, quizId) {
 
 // GET /quizes
 exports.index = function(req, res) {
-  models.Quiz.findAll().then(
-    function(quizes) {
-      res.render('quizes/index.ejs', {quizes: quizes, errors: []});
-    }
-  ).catch(function(error){next(error)});
+  //models.Quiz.findAll().then(
+    //function(quizes) {
+      //res.render('quizes/index.ejs', {quizes: quizes, errors: []});
+    //}
+  //).catch(function(error){next(error)});
+  if (req.query.search) {
+		var search = '%' + req.query.search + '%';
+		search = search.replace(' ', '%').toLowerCase();
+		models.Quiz.findAll({where: ['lower(pregunta) like ?', search], order: 'pregunta ASC'}).then(
+			function(quizes) {
+				res.render('quizes/index.ejs', { quizes: quizes, errors: [] });
+			}
+		).catch(function(error) {
+			next(error);
+		});
+	} else {
+		models.Quiz.findAll().then(
+			function(quizes) {
+				res.render('quizes/index.ejs', { quizes: quizes, errors: [] });
+			}
+		).catch(function(error) {
+			next(error);
+		});
+	}
 };
 
 // GET /quizes/:id

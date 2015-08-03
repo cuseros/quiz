@@ -42,7 +42,9 @@ sequelize.sync().then(function() {
     if(count === 0) {   // la tabla se inicializa solo si está vacía
       Quiz.bulkCreate( 
         [ {pregunta: 'Capital de Italia',   respuesta: 'Roma', tema: 'otro'},
-          {pregunta: 'Capital de Portugal', respuesta: 'Lisboa', tema: 'otro'}
+          {pregunta: 'Capital de Portugal', respuesta: 'Lisboa', tema: 'otro'},
+          {pregunta: 'Capital de España', respuesta: 'Madrid', tema: 'otro'},
+          {pregunta: 'Capital de Francia', respuesta: 'Paris', tema: 'otro'}
         ]
       ).then(function(){console.log('Base de datos inicializadaaaaaaaaaaaaaaaaaaaaaaaaaaaaa tambien con temas')});
     };
