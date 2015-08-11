@@ -54,6 +54,11 @@ exports.create = function(req, res) {
         // Solo guardo algunos campos del usuario en la sesion.
         // Esto es lo que uso para saber si he hecho login o no.
         req.session.user = {id:user.id, username:user.username};
+		
+		// Crea req.session.tiempo para guardar la hora del reloj del sistema
+      	req.session.tiempo = new Date().getTime();
+      	req.session.autoLogout= false; //para indicar que no se cierre la sesión automáticamente pasados 2 minutos 
+		
 
         // Vuelvo al url indicado en redir
         res.redirect("/");

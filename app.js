@@ -38,6 +38,22 @@ app.use(function(req, res, next) {
 
   // Hacer visible req.session en las vistas
   res.locals.session = req.session;
+  
+  
+  // Terminar sesión si han pasado 2 minutos inactivo
+  if (req.session.tiempo){
+	var tiempoActual = new Date().getTime();
+	var tiempoTranscurrido = tiempoActual - req.session.tiempo;
+      if (tiempoTranscurrido > (2 * 60 * 1000)) { // 2 minutos en milisegundos
+         delete req.session.tiempo;
+         req.session.autoLogout = true;   
+         res.redirect("/logout");
+      } else {
+         req.session.tiempo = tiempoActual;
+      	}
+  };
+  
+  
   next();
 });
 

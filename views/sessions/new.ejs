@@ -1,5 +1,12 @@
 <h2>Login</h2>
 
+<% if (session.autoLogout==true && session.tiempo!="undefined") { %>
+   <p id="ErrorMsgs"><strong>ATENCIÓN: </strong>Usuario inactivo</p>
+   <p id="ErrorMsgs">Ha estado inactivo durante más de 2 minutos. Vuelva a hacer Login</p>
+   <% session.autoLogout = false %>
+<% } %>
+
+
 <form method='POST' action='/login'>
 
   <div class="field">
